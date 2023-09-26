@@ -1,4 +1,10 @@
-
+/**
+ * Tailwind CSS imports
+ * View the full documentation at https://tailwindcss.com
+ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /**
  * WHAT IS THIS FILE?
@@ -30,6 +36,22 @@ html {
 }
 
 body {
-  padding: 0;
+  padding: 20px;
+  background-color: rgb(239, 243, 247);
   line-height: inherit;
+  user-select: none;
 }
+
+h1 {
+  font-weight: 450;
+  user-select: none;
+  color: #454545;
+}
+#cal-grid-in-view > *:hover:not(.date-selected) {
+  background-color: #f8fafc;
+}
+
+.date-selected {
+  background-color: #e2e8f0;
+}
+
