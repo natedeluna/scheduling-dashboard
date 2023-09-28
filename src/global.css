@@ -55,3 +55,15 @@ h1 {
   background-color: #e2e8f0;
 }
 
+textarea {
+  all: unset;
+  border-bottom: 1px solid #e2e8f000;
+  height: 66px;
+  width: 100%;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+textarea:focus {
+  border-bottom: 1px solid #e2e8f0;
+}

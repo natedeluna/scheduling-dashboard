@@ -1,6 +1,6 @@
 import { $, component$ } from "@builder.io/qwik";
 
-export const Calendar = component$(() => {
+export const Calendar = component$((props:{renderTimeSlots: () => void} ) => {
     const daysShort = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
     const monthsLong = [
         "January", "February", "March", "April", "May", "June", "July", "August", "September",
@@ -22,15 +22,14 @@ export const Calendar = component$(() => {
         const direction = currentTarget.getAttribute("data-index");
     });
     const selectDate = $((event, currentTarget) => {
-        //TODO make animated background fill starting from event.Xoffset and event.Yoffset
-        // const xDim = currentTarget.offsetWidth;
-        // const yDim = currentTarget.offsetHeight;
+        props.renderTimeSlots();
         currentTarget.classList.toggle('date-selected')
         Array.from(document.querySelectorAll('.date-item')).forEach((el) => {
             if (el !== currentTarget) {
                 el.classList.remove('date-selected');
             }
         });
+
     });
 
 
