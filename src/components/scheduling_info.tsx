@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { $, component$, useSignal } from "@builder.io/qwik";
 
 

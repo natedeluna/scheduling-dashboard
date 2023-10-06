@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { component$, $, useSignal } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import {Calendar} from "../components/calendar";

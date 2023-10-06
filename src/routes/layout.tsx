@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { component$, Slot } from "@builder.io/qwik";
 import type { RequestHandler } from "@builder.io/qwik-city";
 

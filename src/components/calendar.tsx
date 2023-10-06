@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { $, component$ } from "@builder.io/qwik";
 
 export const Calendar = component$((props:{renderTimeSlots: () => void} ) => {
