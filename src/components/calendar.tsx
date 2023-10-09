@@ -1,57 +1,46 @@
 /* eslint-disable */
-import { $, component$ } from "@builder.io/qwik";
+import { $, component$, useSignal } from "@builder.io/qwik";
 
-export const Calendar = component$((props:{renderTimeSlots: () => void} ) => {
-    const daysShort = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+export const Calendar = component$((props:{days: Object, updateSelDay: (newDay: number) => void } ) => {
+    let days = useSignal<Object>(props.days);
+    const daysShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const monthsLong = [
         "January", "February", "March", "April", "May", "June", "July", "August", "September",
     ];    
-    const today = new Date();
-    const currentYear = today.getFullYear();
-    const currentMonth = today.getMonth();
-    const daysInCurrentMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-    let daysObj = Array.from({ length: daysInCurrentMonth }, (_, i) => {
-      return {
-        day: i + 1,
-        month: currentMonth,
-        year: currentYear,
-        dayOfWeek: new Date(currentYear, currentMonth, i + 1).getDay()
-      };
-    });
     
-    const nextMonth = $((event, currentTarget) => {
+    const nextMonth = $((event:any, currentTarget:any) => {
         const direction = currentTarget.getAttribute("data-index");
+        console.log(direction);
     });
-    const selectDate = $((event, currentTarget) => {
-        props.renderTimeSlots();
+    const selectDate = $((event:any, currentTarget:any) => {
         currentTarget.classList.toggle('date-selected')
         Array.from(document.querySelectorAll('.date-item')).forEach((el) => {
             if (el !== currentTarget) {
                 el.classList.remove('date-selected');
             }
         });
-
+        
+        props.updateSelDay(parseInt(currentTarget.getAttribute("data-key")));
     });
-
 
     const max = 6;
     let start = 0;
     let el_array = [];
-    for (let i = 0; i <= daysObj.length-1;) {
+    for (let i = 0; i <= days.value.length-1;) {
         start < max ? start++ : start = 0;
-        if (daysObj[i].dayOfWeek === start) {
+        if (days.value[i].dayOfWeek === start) {
             el_array.push (
                 <div 
-                    key={daysObj[i].day} 
+                    data-key={days.value[i].day} 
                     class="flex justify-center cursor-default rounded-lg py-5 date-item transition-all duration-800 ease-out"
                     onClick$={selectDate}>
-                    {daysObj[i].day}
+                    {days.value[i].day}
                 </div>
             );
             i++;
         } else {
             el_array.push (
-                <div key={daysObj[i].day} class="flex justify-center cursor-default rounded-lg py-5 transition-all duration-700 ease-out">
+                <div data-key={days.value[i].day} class="flex justify-center cursor-default rounded-lg py-5 transition-all duration-700 ease-out">
                 </div>
             );
         }
@@ -61,8 +50,8 @@ export const Calendar = component$((props:{renderTimeSlots: () => void} ) => {
         <>
             <div id="cal-top-bar" class=" relative flex gap-3">
 
-                <h1 class="text-gray-400 ">{monthsLong[currentMonth]}</h1>
-                <h1 class="">{currentYear}</h1>
+                <h1 class="text-gray-400 ">{monthsLong[days.value[0].month]}</h1>
+                <h1 class="">{days.value[0].year}</h1>
 
                 <div class=" ml-auto flex gap-5 items-center">
                     <div onClick$={nextMonth} data-index="left" style="padding: 7px; border-radius: 5px;" class="hover:bg-slate-100 ">

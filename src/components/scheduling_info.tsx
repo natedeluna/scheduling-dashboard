@@ -4,7 +4,7 @@ import { $, component$, useSignal } from "@builder.io/qwik";
 
 export const DurationOption = component$((props: {time: number, menuExpanded: boolean, selectedDuration: number, updateSelectedDuration: (newDur: number) => void} ) => {
     return <span
-    onClick$={$((event, currentTarget) => {     props.updateSelectedDuration(props.time)    })}
+    onClick$={$((event:any, currentTarget:any) => {     props.updateSelectedDuration(props.time)    })}
     class=  {[
         props.menuExpanded || props.time == props.selectedDuration ? ["py-1", "px-1", "opacity-100", "block", "overflow-auto"] : ["hidden", "py-1", "px-1", "opacity-0", "overflow-hidden"],
         props.menuExpanded ? ["hover:bg-slate-100", "active:bg-slate-200"] : ["hover:none"],
@@ -18,7 +18,7 @@ export const SchedulingInfo = component$(() => {
     let showDurationOptions = useSignal(false);
     let durationOptions = [15, 30, 60];
 
-    const toggleDurationMenu = $((event, currentTarget) => {
+    const toggleDurationMenu = $((event:any, currentTarget:any) => {
         showDurationOptions.value = !showDurationOptions.value;
     });
 
@@ -63,7 +63,7 @@ export const SchedulingInfo = component$(() => {
                 Meeting Notes:</span><br></br>
                 <textarea maxLength={100}> A quick product demo</textarea>
             </div>
-            <div class="flex gap-3 text-slate-800 py-2 px-2 cursor-pointer rounded-md hover:bg-emerald-100 active:bg-emerald-200 transition mt-[5rem]">
+            <div class="flex gap-3 text-slate-800 py-2 px-2 cursor-pointer rounded-md hover:bg-emerald-100 active:bg-emerald-200 transition">
                 <svg class="my-auto"width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M17 1.9375L8.52941 10.375L5.70588 7.5625M12.2941 1H2.88235C1.84276 1 1 1.83947 1 2.875V14.125C1 15.1606 1.84276 16 2.88235 16H14.1765C15.2161 16 16.0588 15.1606 16.0588 14.125V8.5" stroke="#455060" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
