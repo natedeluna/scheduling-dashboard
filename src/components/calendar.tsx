@@ -2,7 +2,7 @@
 import { $, component$, useSignal } from "@builder.io/qwik";
 
 export const Calendar = component$((props:{days: Object, updateSelDay: (newDay: number) => void } ) => {
-    let days = useSignal<Object>(props.days);
+    let days = useSignal<any>(props.days);
     const daysShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const monthsLong = [
         "January", "February", "March", "April", "May", "June", "July", "August", "September",
@@ -26,13 +26,15 @@ export const Calendar = component$((props:{days: Object, updateSelDay: (newDay: 
     const max = 6;
     let start = 0;
     let el_array = [];
-    for (let i = 0; i <= days.value.length-1;) {
+    for (let i = 0; i <= Object.keys(days.value).length-1;) {
         start < max ? start++ : start = 0;
         if (days.value[i].dayOfWeek === start) {
+            const emptyTimeSlots = days.value[i].timeSlots.length == 0
+            console.log(emptyTimeSlots, days.value[i].timeSlots);
             el_array.push (
                 <div 
-                    data-key={days.value[i].day} 
-                    class="flex justify-center cursor-default rounded-lg py-5 date-item transition-all duration-800 ease-out"
+                    data-key={days.value[i].day}
+                    class={["relative","flex", "hover:bg-slate-50" ,"active:bg-slate-200" ,"justify-center" ,"cursor-default" ,"bg-slate-0" ,"rounded-lg" ,"py-5" ,"date-item" ,"transition-all" ,"duration-800" ,"ease-out" ,days.value[i].timeSlots.length !== 0 ? "slots-available" : ""]}
                     onClick$={selectDate}>
                     {days.value[i].day}
                 </div>
@@ -75,7 +77,7 @@ export const Calendar = component$((props:{days: Object, updateSelDay: (newDay: 
                     );
                 })}
             </div>
-            <div id="cal-grid-in-view" class="grid grid-cols-7 gap-0.5">
+            <div class="cal-grid-in-view grid grid-cols-7 gap-0.5">
                 {
                     el_array.map((day, index) => {
                         return (

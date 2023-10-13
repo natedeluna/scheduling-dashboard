@@ -47,14 +47,26 @@ h1 {
   user-select: none;
   color: #454545;
 }
-#cal-grid-in-view > *:hover:not(.date-selected) {
-  background-color: #f8fafc;
+.cal-grid-in-view > .date-selected:hover {
+  background-color: #f1f5f9;
 }
-
-.date-selected {
+.cal-grid-in-view > .date-selected:active {
   background-color: #e2e8f0;
 }
+.date-selected {
+  background-color: #f1f5f9;
+}
 
+.slots-available::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  bottom: .75rem;
+  background-color: #6ee7b7;
+  border-radius: 50%;
+
+}
 textarea {
   all: unset;
   border-bottom: 1px solid #e2e8f000;
