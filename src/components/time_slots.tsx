@@ -1,7 +1,6 @@
 
 /* eslint-disable */
 import { $, component$, useSignal } from "@builder.io/qwik";
-import { match } from "assert";
 
 export const TimeSlots = component$((props: {timeSlots:any}) => {
     let times = useSignal(props.timeSlots);

@@ -5,8 +5,7 @@ export const Calendar = component$((props:{days: Object, updateSelDay: (newDay: 
     let days = useSignal<any>(props.days);
     const daysShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const monthsLong = [
-        "January", "February", "March", "April", "May", "June", "July", "August", "September",
-    ];    
+        "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];    
     
     const nextMonth = $((event:any, currentTarget:any) => {
         const direction = currentTarget.getAttribute("data-index");
@@ -29,8 +28,6 @@ export const Calendar = component$((props:{days: Object, updateSelDay: (newDay: 
     for (let i = 0; i <= Object.keys(days.value).length-1;) {
         start < max ? start++ : start = 0;
         if (days.value[i].dayOfWeek === start) {
-            const emptyTimeSlots = days.value[i].timeSlots.length == 0
-            console.log(emptyTimeSlots, days.value[i].timeSlots);
             el_array.push (
                 <div 
                     data-key={days.value[i].day}
@@ -52,7 +49,7 @@ export const Calendar = component$((props:{days: Object, updateSelDay: (newDay: 
         <>
             <div id="cal-top-bar" class=" relative flex gap-3">
 
-                <h1 class="text-gray-400 ">{monthsLong[days.value[0].month]}</h1>
+                <h1 class="text-gray-400 ">{monthsLong[(days.value[0].month)]}</h1>
                 <h1 class="">{days.value[0].year}</h1>
 
                 <div class=" ml-auto flex gap-5 items-center">
