@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { $, component$, useSignal } from "@builder.io/qwik";
+import { $, component$, useSignal, useVisibleTask$ } from "@builder.io/qwik";
 
 
 export const DurationOption = component$((props: {time: number, menuExpanded: boolean, selectedDuration: number, updateSelectedDuration: (newDur: number) => void} ) => {
@@ -17,6 +17,7 @@ export const SchedulingInfo = component$(() => {
     let selectedDuration = useSignal(60);
     let showDurationOptions = useSignal(false);
     let durationOptions = [15, 30, 60];
+    let welcomeText = useSignal("");
 
     const toggleDurationMenu = $((event:any, currentTarget:any) => {
         showDurationOptions.value = !showDurationOptions.value;
@@ -26,18 +27,33 @@ export const SchedulingInfo = component$(() => {
         selectedDuration.value = newDur;
     });
 
+    const delay = $((ms: any) => new Promise(resolve => setTimeout(resolve, ms)));
+
+    useVisibleTask$( async() => {
+        let greeting: String = "Good Morning Nate";
+        let startingDelay = 100
+        for (let i=0 ; i < greeting.length; i++) {
+            welcomeText.value += greeting.charAt(i);
+
+            await delay(Math.max(startingDelay -= Math.floor(Math.random()*10 + 1), 30));
+        }
+    });
+
     return (
         <>
-            <section class="h-full flex flex-col justify-between">
+            <section class="h-full flex flex-col justify-between ">
                 <div id="utils" class="grid grid-flow-row gap-3">
                     <div class="flex flex-col justify-center items-start gap-3 h-fit">
                         <div class="w-[32px] h-[32px] rounded-[100px] bg-slate-50 overflow-hidden">
                             <img src="/static/4ACBD75E-C9DD-443C-AD35-8A6E0C5D67EB.JPG" alt="Profile Image" width="200" height="200" class=""/>
                         </div>
-                        <h3 class="font-[600] text-slate-500">Nate De Luna</h3>
+                        <h3 class="font-[400] text-slate-500 text-[1.25rem] h-[2rem] w-full" >{welcomeText.value}</h3>
+                    </div>
+                    <div class="text-sm text-gray-300 mt-3 mb-[-10px] px-2">
+                        Choose Duration
                     </div>
                     <div id= "duration-menu"
-                        class={["font-[600]", "text-[1rem]", "text-slate-800", "flex"," gap-3","", "py-2","h-fit", "px-2"," rounded-md", !showDurationOptions.value ? ["active:bg-slate-200", "hover:bg-slate-100"]: "",  "transition", "items-center"]}
+                        class={["relative","font-[600]", "text-[1rem]", "text-slate-800", "flex"," gap-3","mb-3", "py-2","h-fit", "px-2"," rounded-md", !showDurationOptions.value ? ["active:bg-slate-200", "hover:bg-slate-100"]: "",  "transition", "items-center"]}
                         onClick$={toggleDurationMenu}
                         >
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" style="">
@@ -55,23 +71,24 @@ export const SchedulingInfo = component$(() => {
                             return <DurationOption time={time} menuExpanded={showDurationOptions.value} selectedDuration={selectedDuration.value} updateSelectedDuration={updateSelectedDuration}/>;
                         })}
                     </div>
-                    <div class={["py-1","px-2","w-fit","h-fit","", "bg-slate-100", "flex", "gap-3", "rounded-full", "text-[.8rem]", "font-[600]", "block", "items-center"]}>
+                    <div class={["py-1.5","px-2.5","w-fit","h-fit","", "bg-slate-100", "flex", "gap-2", "rounded-full", "text-[.8rem]", "font-[600]", "block", "items-center"]}>
                         <svg class="" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 0C4.0293 0 0 4.0293 0 9C0 13.9707 4.0293 18 9 18C13.9707 18 18 13.9707 18 9C18 4.0293 13.9707 0 9 0ZM12.582 8.1C12.4884 5.74875 12.0316 3.6693 11.3553 2.20365C13.8973 3.08745 15.7927 5.35275 16.1374 8.1H12.582ZM9 16.155C8.45415 15.7253 7.3764 13.5738 7.2207 9.9H10.7793C10.6236 13.5738 9.54585 15.7253 9 16.155ZM7.2207 8.1C7.3764 4.4262 8.45415 2.27475 9 1.845C9.54585 2.27475 10.6236 4.4262 10.7793 8.1H7.2207ZM6.6447 2.20365C5.9688 3.6693 5.5116 5.74875 5.418 8.1H1.86255C2.20725 5.3532 4.10265 3.08745 6.6447 2.20365ZM5.418 9.9C5.5116 12.2512 5.96835 14.3307 6.6447 15.7963C4.10265 14.9125 2.20725 12.6468 1.86255 9.9H5.418ZM11.3553 15.7963C12.0312 14.3307 12.4884 12.2512 12.582 9.9H16.1379C15.7927 12.6468 13.8973 14.9125 11.3553 15.7963Z" fill="#455060"/>
                         </svg>
-                        America / New York
+                        {Intl.DateTimeFormat().resolvedOptions().timeZone}
                     </div>
                     <div class="text-sm text-gray-500"><span class="text-gray-300">
-                        Meeting Notes:</span><br></br>
+                        Event Notes:</span><br></br>
                         <textarea maxLength={370}
                             onInput$={$((event:any, currentTarget:any) => {
                                 currentTarget.style.height = "auto";
                                 currentTarget.style.height = currentTarget.scrollHeight -3 + "px";
                             })}
-                        > A quick product demo</textarea>
+                        >A quick product demo</textarea>
                     </div>
                 </div>
-                <div class="h-max">
+                <div class="h-[1px] w-full bg-slate-100 mt-auto"></div>
+                <div class="h-max mt-4">
                     <div class="flex gap-3 text-slate-800 py-2 px-2 cursor-pointer rounded-md hover:bg-emerald-100 active:bg-emerald-200 transition h-fit">
                         <svg class="my-auto"width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M17 1.9375L8.52941 10.375L5.70588 7.5625M12.2941 1H2.88235C1.84276 1 1 1.83947 1 2.875V14.125C1 15.1606 1.84276 16 2.88235 16H14.1765C15.2161 16 16.0588 15.1606 16.0588 14.125V8.5" stroke="#455060" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

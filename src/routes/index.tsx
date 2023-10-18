@@ -14,8 +14,8 @@ export default component$(() => {
     timeSlots.value = days.value[newDay-1].timeSlots;
   });
   return (
-      <main class="grid grid-cols-7 divide-grey divide-x border rounded-[5px] bg-white">
-        <div class="col-span-2 p-6">
+      <main class="grid grid-cols-7 divide-grey divide-x border rounded-[5px] bg-white max-w-6xl mx-auto min-w-[1040px] ">
+        <div class="col-span-2 p-6 overflow-x-hidden">
           <SchedulingInfo/>
         </div>
         <div class="col-span-3 p-6 relative transform -translate-x-full left-full max-w-[500px]">
