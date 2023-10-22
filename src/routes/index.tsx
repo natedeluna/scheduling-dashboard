@@ -7,8 +7,8 @@ import {TimeSlots} from "../components/time_slots";
 import days_meta_data from "~/components/time_slots_singleton.js";
 
 export default component$(() => {
-  const days = useSignal<Object>(days_meta_data);
-  let timeSlots = useSignal<any>(days_meta_data[0]?.timeSlots || [""]);
+  const days = useSignal<any>(days_meta_data.generateTimes({}));
+  let timeSlots = useSignal<any>(days_meta_data.list[0].timeSlots || [""]);
 
   const updateSelDay = $((newDay: number) => {
     timeSlots.value = days.value[newDay-1].timeSlots;

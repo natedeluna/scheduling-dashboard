@@ -35,7 +35,7 @@ export const SchedulingInfo = component$(() => {
         for (let i=0 ; i < greeting.length; i++) {
             welcomeText.value += greeting.charAt(i);
 
-            await delay(Math.max(startingDelay -= Math.floor(Math.random()*5 + 1), 50));
+            await delay(55);
         }
     });
 
@@ -47,7 +47,7 @@ export const SchedulingInfo = component$(() => {
                         <div class="w-[32px] h-[32px] rounded-[100px] bg-slate-50 overflow-hidden">
                             <img src="/static/4ACBD75E-C9DD-443C-AD35-8A6E0C5D67EB.JPG" alt="Profile Image" width="200" height="200" class=""/>
                         </div>
-                        <h3 class="font-[400] text-slate-500 text-[1.25rem] h-[2rem] w-full spacing-sm" >{welcomeText.value}</h3>
+                        <h3 class="font-[400] text-slate-500 text-[1.25rem] h-[2rem] w-full tracking-wide" >{welcomeText.value}</h3>
                     </div>
                     <div class="text-sm text-gray-300 mt-3 mb-[-10px] px-2">
                         Choose Duration
@@ -83,14 +83,20 @@ export const SchedulingInfo = component$(() => {
                             onInput$={$((event:any, currentTarget:any) => {
                                 currentTarget.style.height = "auto";
                                 currentTarget.style.height = currentTarget.scrollHeight -3 + "px";
-                            })}
-                        >A quick product demo</textarea>
+                            })}>A quick product demo</textarea>
                     </div>
                 </div>
                 <div class="h-[1px] w-full bg-slate-100 mt-auto"></div>
                 <div class="h-max mt-4">
-                    <div class="flex gap-3 text-slate-800 py-2 px-2 cursor-pointer rounded-md hover:bg-emerald-100 active:bg-emerald-200 transition h-fit">
-                        <svg class="my-auto"width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <div
+                        onClick$={$((event:any, currentTarget:any) => {
+                            currentTarget.classList.add('submit')
+                            setTimeout(() => {
+                                currentTarget.classList.remove('submit')
+                            }, 3000);
+                        })} 
+                        class="flex gap-3 text-slate-800 py-2 px-2 cursor-pointer rounded-md hover:bg-emerald-100 active:bg-emerald-200 transition h-fit">
+                        <svg class="my-auto pointer-events-none"width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M17 1.9375L8.52941 10.375L5.70588 7.5625M12.2941 1H2.88235C1.84276 1 1 1.83947 1 2.875V14.125C1 15.1606 1.84276 16 2.88235 16H14.1765C15.2161 16 16.0588 15.1606 16.0588 14.125V8.5" stroke="#455060" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                         Verify Time

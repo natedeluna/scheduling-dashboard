@@ -1,5 +1,6 @@
 /* eslint-disable */
 import { $, component$, useSignal } from "@builder.io/qwik";
+import days_meta_data from "~/components/time_slots_singleton.js";
 
 export const Calendar = component$((props:{days: Object, updateSelDay: (newDay: number) => void } ) => {
     let days = useSignal<any>(props.days);
@@ -8,8 +9,8 @@ export const Calendar = component$((props:{days: Object, updateSelDay: (newDay: 
         "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];    
     
     const nextMonth = $((event:any, currentTarget:any) => {
-        const direction = currentTarget.getAttribute("data-index");
-        console.log(direction);
+        const direction = parseInt(currentTarget.getAttribute("data-index"));
+        console.log((days_meta_data.generateTimes({selectMonthDirection: direction})));
     });
     const selectDate = $((event:any, currentTarget:any) => {
         currentTarget.classList.toggle('date-selected')
@@ -53,13 +54,13 @@ export const Calendar = component$((props:{days: Object, updateSelDay: (newDay: 
                 <h1 class="">{days.value[0].year}</h1>
 
                 <div class=" ml-auto flex gap-5 items-center">
-                    <div onClick$={nextMonth} data-index="left" style="padding: 7px; border-radius: 5px;" class="hover:bg-slate-100 ">
+                    <div onClick$={nextMonth} data-index="-1" style="padding: 7px; border-radius: 5px;" class="hover:bg-slate-100 ">
                     <svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7 11L1.91743 6.7141C1.43999 6.3115 1.44431 5.57463 1.92642 5.17765L7 1" stroke="#969696" stroke-width="2" stroke-linecap="round"/>
                     </svg>
 
                     </div>
-                    <div onClick$={nextMonth} data-index="right" style="padding: 7px; border-radius: 5px;" class="hover:bg-slate-100 ">
+                    <div onClick$={nextMonth} data-index="1" style="padding: 7px; border-radius: 5px;" class="hover:bg-slate-100 ">
                     <svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 1L6.08257 5.2859C6.56001 5.6885 6.55569 6.42537 6.07358 6.82235L1 11" stroke="#969696" stroke-width="2" stroke-linecap="round"/>
                     </svg>

@@ -4,15 +4,18 @@ class TimeSlotsSingleton {
         this.monthsLong = [
             "January", "February", "March", "April", "May", "June", "July", "August", "September",
         ];
+        this.monthIterator = 0;
         this.list;
-        return this.generateTimes();
     }
 
-    generateTimes() {
-
+    generateTimes(props) {
+      this.list = [];
+      props.selectMonthDirection ? this.monthIterator += props.selectMonthDirection : this.monthIterator;
+      this.monthIterator > 2 ? this.monthIterator = 2 : this.monthIterator;
+      this.monthIterator < 0 ? this.monthIterator = 1 : this.monthIterator;
       this.today = new Date();
       this.currentYear = this.today.getFullYear();
-      this.currentMonth = this.today.getMonth();
+      this.currentMonth = this.today.getMonth() + this.monthIterator;
       this.daysInCurrentMonth = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
       this.selectedTimeWindow = 60;
       // **********************
@@ -46,7 +49,8 @@ class TimeSlotsSingleton {
       }
       return this.list;
     }
+
 }
 
-const days_meta_data = Object.freeze(new TimeSlotsSingleton());
+const days_meta_data = new TimeSlotsSingleton();
 export default days_meta_data;
