@@ -4,6 +4,8 @@ import type { DocumentHead } from "@builder.io/qwik-city";
 import {Calendar} from "../components/calendar";
 import {SchedulingInfo} from "../components/scheduling_info";
 import {TimeSlots} from "../components/time_slots";
+import {DurationToggle} from "../components/duration_toggle";
+import {DurationSlider} from "~/components/duration_slider";
 import days_meta_data from "~/components/time_slots_singleton.js";
 
 export default component$(() => {
@@ -23,6 +25,8 @@ export default component$(() => {
         </div>
         <div class="col-span-2 p-6">
           <TimeSlots timeSlots={timeSlots}/>
+          <DurationToggle/>
+          <DurationSlider/>
         </div>
       </main>
   );

@@ -105,3 +105,8 @@ textarea:focus {
     background-position: -200% 0;
   }
 }
+
+.slider-toggle {
+  transition: width .8s ease-out, opacity .1s ease, padding .2s ease-out;
+}
+
