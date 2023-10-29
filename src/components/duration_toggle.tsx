@@ -29,7 +29,7 @@ export const DurationToggle = component$(() => {
     return (
         <>
             <div id= ""
-            class={["relative","w-full","font-[600]", "text-[1rem]", "gap-3","text-slate-800", "flex","","", "py-2","h-fit", "px-2"," rounded-md", !showDurationOptions.value ? ["active:bg-slate-200", "hover:bg-slate-100"]: "",  "transition", "items-center"]}
+            class={["relative","w-full","font-[600]", "text-[1rem]", "gap-2","text-slate-800", "flex","","", "py-2","h-fit", "px-2"," rounded-xl", !showDurationOptions.value ? ["active:bg-slate-200", "hover:bg-slate-100"]: "",  "transition", "items-center"]}
             onClick$={toggleDurationMenu}
             >
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" style="min-width: 18px;">
