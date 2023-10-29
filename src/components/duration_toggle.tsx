@@ -9,7 +9,7 @@ export const DurationItem = component$((props: {time: number, menuExpanded: bool
         props.menuExpanded ? ["hover:bg-slate-100", "active:bg-slate-200"] : ["hover:none"],
         props.time == props.selectedDuration ?["font-[600]"] : ["font-[400]"],
         props.time == props.selectedDuration && props.menuExpanded ? ["bg-slate-50"] : ["bg-transparent"],
-         "text-slate-700", "rounded-md", "whitespace-nowrap","slider-toggle"]}
+         "text-slate-700", "rounded-lg", "whitespace-nowrap","slider-toggle"]}
     >{props.time} Min</span>;
 });
 
@@ -29,7 +29,7 @@ export const DurationToggle = component$(() => {
     return (
         <>
             <div id= ""
-            class={["relative","w-full","font-[600]", "text-[1rem]", "gap-2","text-slate-800", "flex","","", "py-2","h-fit", "px-2"," rounded-xl", !showDurationOptions.value ? ["active:bg-slate-200", "hover:bg-slate-100"]: "",  "transition", "items-center"]}
+            class={["relative","w-full","font-[600]", "text-[1rem]", "gap-2","text-slate-800", "flex","py-1","h-fit", "px-2"," rounded-xl", !showDurationOptions.value ? ["active:bg-slate-200", "hover:bg-slate-100"]: "",  "transition", "items-center"]}
             onClick$={toggleDurationMenu}
             >
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" style="min-width: 18px;">

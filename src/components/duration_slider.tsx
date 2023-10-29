@@ -14,10 +14,10 @@ export const DurationItem = component$((props: {
     onClick$={$((event:any, currentTarget:any) => {     props.updateSelectedDuration(props.time)    })}
     id={`duration-item-${props.time}`}
     class=  {[
-        ["relative","py-1", "px-1", "opacity-100", "block", "overflow-auto", "w-fit", "cursor-pointer"],
-        props.time == props.selectedDuration ?["font-[600]"] : ["font-[500]"],
+        ["relative","py-1", "px-1", "opacity-100", "block", "overflow-auto", "w-fit", "cursor-pointer", "text-center", "font-500"],
+        props.time == props.selectedDuration ?["text-slate-800"] : ["text-slate-300"],
         props.time == props.selectedDuration ?[""] : ["hover:bg-indigo-50"],
-         "text-slate-800", "rounded-md", "transition-all", "duration-300", "ease-out", "whitespace-nowrap", "z-10",]}
+         "text-slate-800", "rounded-xl", "transition-all", "duration-300", "ease-out", "whitespace-nowrap", "z-10",]}
     >{props.time} Min</span>;
 });
 
@@ -31,7 +31,7 @@ export const DurationSignal = component$((props:{
         class={[
           'absolute',
           'h-full',
-          'rounded-md',
+          'rounded-lg',
           'bg-indigo-100',
           'pointer-events-none',
           'transition-transform', // Add transition-transform for the transform property
@@ -58,7 +58,6 @@ export const DurationSlider = component$(() => {
             return;
         }
         if (!init) {
-            console.log("setting offset left", offsetLeft, width);
             currentOffsetLeft.value = offsetLeft;
             currentWidth.value = width;
         }
@@ -80,7 +79,7 @@ export const DurationSlider = component$(() => {
     return (
         <>
             <div id= ""
-                class={["relative","w-full","font-[600]", "text-[1rem]", "text-slate-800", "flex"," gap-2","", "py-2","h-fit", "px-2"," rounded-xl", "transition", "items-center", "border", "border-slate-100", "bg-slate-50"]}
+                class={["relative","w-fit","font-[600]", "text-[1rem]", "text-slate-800", "flex"," gap-2","", "py-1","h-fit", "px-2"," rounded-xl", "transition", "items-center", "border", "border-slate-100", "bg-slate-50", "my-2"]}
                 onClick$={selectDuration}
             >
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" style="min-width: 18px;">
